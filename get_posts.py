@@ -2,12 +2,13 @@ import praw
 import numpy as np 
 import pandas as pd
 import datetime, time, sys, pickle
+from ggplot import *
 
 user_agent = "post-momentum-tracker"
 r = praw.Reddit(user_agent=user_agent)
-NUM_POSTS = 5 # number of posts
-FREQ = 30 # frequency of updated scores (in seconds)
-END = 1 # number of hours to continue updating
+NUM_POSTS = 10 # number of posts
+FREQ = 20 # frequency of updated scores (in seconds)
+END = 12 # number of hours to continue updating
 LENGTH = END * 60 * (60 / FREQ) # length of array needed to store
 index = range(0, LENGTH)
 
@@ -36,3 +37,6 @@ for t in index:
 
 with open('score_dfs.pickle', 'wb') as handle:
   pickle.dump(dfs, handle)
+
+# plotting
+p = ggplot(aes(x='time', y='score'), data=dfs[0]) + geom_point()
