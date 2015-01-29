@@ -37,6 +37,3 @@ for t in index:
 
 with open('score_dfs.pickle', 'wb') as handle:
   pickle.dump(dfs, handle)
-
-# plotting
-p = ggplot(aes(x='time', y='score'), data=dfs[0]) + geom_point()
